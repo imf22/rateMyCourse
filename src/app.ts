@@ -6,7 +6,9 @@ app.use(express.json());
 app.use(express.static("public"));
 
 app.get('/', (req, res) => {
-  res.send('Hello World!');
+  // res.send('Hello World!');
+  // res.send();
+  res.sendFile('main.html', {root:  "../rateMyCourse/src"});
 });
 
 app.listen(port, () => {
