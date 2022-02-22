@@ -10,4 +10,3 @@ let rating = document.getElementById("rating");
 let review = document.getElementById("review");
 
 let sendButton = document.getElementById("get-button");
-
