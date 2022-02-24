@@ -23,7 +23,7 @@ sendButton.addEventListener("click", function() {
  
 	console.log("the review is",JSON.stringify(review));
 
-	fetch('/add', {
+	fetch('/postReview', {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/JSON",
