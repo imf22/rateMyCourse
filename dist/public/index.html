@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Drexel Food Truck Reviews</title>
+	<style>
+		table {
+            border: 1px solid black;
+		}
+		th, td {
+			border: 1px solid black;
+			padding: 10px;
+		}
+		table, div, button {
+			margin: 1rem 0;
+		}
+	</style>
+</head>
+<body>
+
+
+
+<h1>Drexel Food Truck Reviews</h1>
+<table>
+<div>
+	<label for="cuisine">Cuisine:</label>
+	<select name="cuisine" id="cuisine-select">
+		<option value="">Please select a cuisine</option>
+		<option value="mexican">Mexican</option>
+		<option value="italian">Italian</option>
+		<option value="meditteranean">Meditteranean</option>
+		<option value="american">American</option>
+		<option value="breakfastbrunch">Breakfast/Brunch</option>
+		<option value="lunchdinner">Lunch/Dinner</option>
+		
+	
+	</select>
+</div>
+<div>
+	<label for="foodTruck">Food Truck:</label>
+	<select name="foodTruck" id="ft-select">
+		<option value="">Please select a food truck</option>
+		<option value="FT1">FT 1</option>
+		<option value="FT2">FT 2</option>
+		<option value="FT3">FT 3</option>
+		<option value="FT4">FT 4</option>
+	
+	</select>
+</div>
+
+<div>
+	<label for="rating">Rating Range:</label>
+	<select name="rating" id="rating-select">
+		<option value="">Please select a rating range</option>
+		<option value="one">0.0-1.0</option>
+		<option value="one">1.0-2.0</option>
+		<option value="two">2.0-3.0</option>
+		<option value="three">3.0-4.0</option>
+		<option value="four">4.0-5.0</option>
+	
+	</select>
+</div>
+
+
+<hr size="2" width="90%" color="black">  
+<button id="get-button">View Food Trucks</button>
+
+<div id="message-div"></div>
+
+</table>
+
+
+
+</body>
+</html>
