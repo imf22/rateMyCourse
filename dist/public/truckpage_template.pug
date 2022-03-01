@@ -1,0 +1,19 @@
+//- truckpage_template.pug
+
+doctype html
+head 
+    meta(charset = 'utef-8')
+    title #{truckname} Reviews 
+
+body     
+    h1 #{truckname}: 
+    h2 Cuisine: #{cuisine}
+    h2 Rating: #{rating} stars
+
+    
+    - for (userreview of reviews)
+        hr(size="2" width="95%" color="black")
+        div
+            h2 #{userreview.user}
+            h3 User Rating: #{userreview.rate}
+            p #{userreview.review}
