@@ -9,6 +9,7 @@ body
     h1 #{truckname}: 
     h2 Cuisine: #{cuisine}
     h2 Rating: #{rating} stars
+    button(style="display: inline;") Post Review
 
     
     - for (userreview of reviews)
@@ -17,3 +18,5 @@ body
             h2 #{userreview.user}
             h3 User Rating: #{userreview.rate}
             p #{userreview.review}
+
+

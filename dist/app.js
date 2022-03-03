@@ -20,7 +20,8 @@ app.get('/test', (req, res) => {
     let r4 = { user: "Hetong", rate: 2, review: `The light was out on the front porch of the house. This was strange. Judy couldn't remember a time when she had ever seen it out. She hopped out of her car and walked to the door. It was slightly ajar and she knew this meant something terrible. She gently pushed the door open and hall her fears were realized. "Surprise! Happy Birthday!" everyone shouted.` };
     // Each review must be in an array
     const reviews_t = [r1, r2, r3, r4];
-    res.send(trucktemplate({ truckname: "Happy Sunshine Food Truck", cuisine: "Breakfast", rating: 4.5, reviews: reviews_t }));
+    // Send request for custom truck page
+    res.send(trucktemplate({ truckname: "McDonalds", cuisine: "Fastfood", rating: 2.5, reviews: reviews_t }));
 });
 app.post('/postReview', function (req, res) {
     let body = req.body;
