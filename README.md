@@ -18,3 +18,16 @@ Now, you can visit http://localhost:3000 in your browser and you should see the 
     Output
     Hello World!
 
+Data base format
+{    
+SERIAL foodtruckid int,
+food truck name CHAR[25],
+rating (out of 5) FLOAT,
+cuisine type CHAR[25],
+reviews: []
+    {
+    users Name CHAR[25],
+    written review CHAR[250]
+    }
+    ]
+}
