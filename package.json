@@ -4,7 +4,7 @@
   "description": "",
   "main": "dist/app.js",
   "scripts": {
-    "start": "rm -r ./dist && tsc && cp -R ./src/public ./dist/public && (cd dist && node app.js)",
+    "start": "cp -R ./dist/data.db ./src && rm -r ./dist && tsc && cp -R ./src/public ./dist/public && cp ./src/data.db ./dist/data.db && (cd dist && node app.js)",
     "lint": "eslint . --ext .ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
