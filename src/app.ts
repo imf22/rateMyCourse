@@ -21,7 +21,7 @@ app.get('/test', (req, res) => {
   const reviews_t = [r1, r2, r3, r4];
 
   // Send request for custom truck page
-  res.send(trucktemplate({truckname: "McDonalds", cuisine: "Fastfood", rating: 2.5 , reviews: reviews_t}));
+  res.send(trucktemplate({truckname: "Happy Sunshine Truck", cuisine: "Breakfast", rating: 4.5 , reviews: reviews_t}));
 });
 
 
