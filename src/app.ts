@@ -14,7 +14,7 @@ app.use(express.static("public"));
 //create database
 const sqlite3 = require('sqlite3').verbose();
 const db = new sqlite3.Database('data.db');
-db.exec('CREATE TABLE TRUCKS(TRUCK_ID INTEGER PRIMARY KEY,USER_NAME TEXT NOT NULL UNIQUE,TRUCK_NAME TEXT NOT NULL UNIQUE,RATING INTEGER NOT NULL,FOOD_TYPE TEXT NOT NULL UNIQUE, REVIEW TEXT NOT NULL UNIQUE )');
+db.exec('CREATE TABLE IF NOT EXISTS TRUCKS(TRUCK_ID INTEGER PRIMARY KEY,USER_NAME TEXT NOT NULL UNIQUE,TRUCK_NAME TEXT NOT NULL UNIQUE,RATING INTEGER NOT NULL,FOOD_TYPE TEXT NOT NULL UNIQUE, REVIEW TEXT NOT NULL UNIQUE )');
 //db.exec('INSERT INTO TRUCKS (TRUCK_ID,USER_NAME,TRUCK_NAME,RATING,FOOD_TYPE,REVIEW) VALUES (1,"TEST","TEST",5,"TEST","GOOD")');
 let sql = 'SELECT * FROM TRUCKS';
 db.all(sql,  (err, row) => {
@@ -35,7 +35,7 @@ app.get('/test', (req, res) => {
   const reviews_t = [r1, r2, r3, r4];
 
   // Send request for custom truck page
-  res.send(trucktemplate({truckname: "McDonalds", cuisine: "Fastfood", rating: 2.5 , reviews: reviews_t}));
+  res.send(trucktemplate({truckname: "Happy Sunshine Food Truck", cuisine: "Breakfast", rating: 4.5 , reviews: reviews_t}));
 });
 
 
