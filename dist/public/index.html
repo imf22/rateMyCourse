@@ -71,5 +71,44 @@
 
 <script src="testDatabase.js"></script>
 
+<table id="food-truck">
+	<tr><th>Food Truck</th><th>Cuisine type</th><th>Rating score</th></tr>
+</table>
+
+<script>
+let foodTruckSelect = document.getElementById("ft-select");
+let cuisineTypeSelect = document.getElementById("cuisine-select");
+let ratingRangeSelect = document.getElementById("rating-select");
+let table = document.getElementById("food-truck");
+
+let sendButton = document.getElementById("get-button");
+sendButton.addEventListener("click", function() {
+	if (foodTruckSelect.value === "" || cuisineTypeSelect.value === "" || ratingRangeSelect=== "") {
+		return;
+	}
+	let food = foodTruckSelect.value;
+	let cuisine = cuisineTypeSelect.value;
+	let rating = ratingRangeSelect.value;
+	let url = ;
+	console.log("Client sending request to URL:", url);
+	fetch(url).then(function (response) {
+		return response.json();
+	}).then(function (data) {
+		console.log("Client received from server:", data);
+		let row = document.createElement("tr");
+		let foodCell = document.createElement("td");
+		foodCell.textContent = food;
+		let cuisineCell = document.createElement("td");
+		cuisineCell.textContent = cuisine;
+		let ratingCell = document.createElement("td");
+		ratingCell.textContent = rating;
+		row.append(foodCell);
+		row.append(cuisineCell);
+		row.append(ratingCell);
+		table.append(row);
+	});
+});
+</script>
+
 </body>
 </html>
