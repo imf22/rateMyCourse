@@ -9,7 +9,10 @@ body
     h1 #{truckname}: 
     h2 Cuisine: #{cuisine}
     h2 Rating: #{rating} stars
-    button(style="display: inline;") Post Review
+    h3
+        a(href="/postReview.html") Post Reviews
+ 
+    //- button(style="display: inline;") Post Review
 
     
     - for (userreview of reviews)
