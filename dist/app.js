@@ -12,6 +12,19 @@ const pug = require('pug');
 const trucktemplate = pug.compileFile('public/truckpage_template.pug');
 app.use(express_1.default.json());
 app.use(express_1.default.static("public"));
+//create database
+const sqlite3 = require('sqlite3').verbose();
+const db = new sqlite3.Database('data.db');
+db.exec('CREATE TABLE IF NOT EXISTS REVIEWS(REVIEW_ID INTEGER PRIMARY KEY AUTOINCREMENT,USER_NAME TEXT NOT NULL,TRUCK_NAME TEXT NOT NULL,RATING INTEGER NOT NULL, REVIEW TEXT NOT NULL)');
+db.exec('CREATE TABLE IF NOT EXISTS TRUCKS(TRUCK_ID INTEGER PRIMARY KEY AUTOINCREMENT,DESCRIPTION TEXT NOT NULL,LOCATION TEXT NOT NULL)');
+//db.exec('INSERT INTO TRUCKS (TRUCK_ID,USER_NAME,TRUCK_NAME,RATING,FOOD_TYPE,REVIEW) VALUES (1,"TEST","TEST",5,"TEST","GOOD")');
+let sql = 'SELECT * FROM REVIEWS';
+db.all(sql, (err, row) => {
+    if (err) {
+        return console.error(err.message);
+    }
+    return console.log(row);
+});
 app.get('/', (req, res) => { });
 app.get('/test', (req, res) => {
     let r1 = { user: "Medha", rate: 3, review: `She looked at her student wondering if she could ever get through. "You need to learn to think for yourself," she wanted to tell him. "Your friends are holding you back and bringing you down." But she didn't because she knew his friends were all that he had and even if that meant a life of misery, he would never give them up.` };
@@ -38,18 +51,16 @@ app.post('/postReview', function (req, res) {
         console.log(req.body);
         res.sendStatus(200);
     }
-    // pool.query(
-    //     "INSERT INTO books(title, genre, quality) VALUES($1, $2, $3) RETURNING *",
-    //     [body.title, body.genre, body.quality]
-    // )
-    //     .then(function (response) {
-    //         console.log(response.rows);
-    //         return res.send();
-    //     })
-    //     .catch(function (error) {
-    //         console.log("error here?");
-    //         return res.sendStatus(500);
-    //     });
+    // insert one row into the REVIEW table
+    db.run(`INSERT INTO REVIEWS(USER_NAME,TRUCK_NAME,RATING,REVIEW) VALUES(?,?,?,?)`, [body.name, body.foodTruck, body.rating, body.review], function (err) {
+        if (err) {
+            return console.log(err.message);
+            return res.sendStatus(500);
+        }
+        // get the last insert id
+        console.log(`A row has been inserted`);
+        return res.send();
+    });
 });
 app.listen(port, hostname, () => {
     console.log(`Listening at: http://${hostname}:${port}`);
