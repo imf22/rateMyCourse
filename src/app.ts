@@ -14,8 +14,11 @@ app.use(express.static("public"));
 //create database
 const sqlite3 = require('sqlite3').verbose();
 const db = new sqlite3.Database('data.db');
-db.exec('CREATE TABLE IF NOT EXISTS TRUCKS(TRUCK_ID INTEGER PRIMARY KEY,USER_NAME TEXT NOT NULL UNIQUE,TRUCK_NAME TEXT NOT NULL UNIQUE,RATING INTEGER NOT NULL,FOOD_TYPE TEXT NOT NULL UNIQUE, REVIEW TEXT NOT NULL UNIQUE )');
+// db.exec('CREATE TABLE IF NOT EXISTS TRUCKS(TRUCK_ID INTEGER PRIMARY KEY,USER_NAME TEXT NOT NULL UNIQUE,TRUCK_NAME TEXT NOT NULL UNIQUE,RATING INTEGER NOT NULL,FOOD_TYPE TEXT NOT NULL UNIQUE, REVIEW TEXT NOT NULL UNIQUE )');
 //db.exec('INSERT INTO TRUCKS (TRUCK_ID,USER_NAME,TRUCK_NAME,RATING,FOOD_TYPE,REVIEW) VALUES (1,"TEST","TEST",5,"TEST","GOOD")');
+
+//db.exec('CREATE TABLE TRUCKS(TRUCK_ID INTEGER PRIMARY KEY,USER_NAME TEXT NOT NULL UNIQUE,TRUCK_NAME TEXT NOT NULL UNIQUE,RATING INTEGER NOT NULL,FOOD_TYPE TEXT NOT NULL UNIQUE, REVIEW TEXT NOT NULL UNIQUE )');
+//db.exec('INSERT INTO TRUCKS (USER_NAME,TRUCK_NAME,RATING,FOOD_TYPE,REVIEW) VALUES ("FT2","FT2",5,"Mexican","GOOD3")');
 let sql = 'SELECT * FROM TRUCKS';
 db.all(sql,  (err, row) => {
     if (err) {
@@ -79,6 +82,37 @@ app.post('/postReview', function (req, res) {
   //         console.log("error here?");
   //         return res.sendStatus(500);
   //     });
+});
+
+
+app.get('/search', (req, res) => {
+    let body = req.body;
+    console.log(req.query);
+  if (
+      !body.hasOwnProperty("O1") &&
+      !body.hasOwnProperty("O2") &&
+      body.hasOwnProperty("O3") 
+  ) {
+	console.log(body.query);
+    //  return res.sendStatus(400);
+  }
+  else{
+    sql=`SELECT * FROM TRUCKS WHERE LOWER(FOOD_TYPE)=\"${req.query['O1']}\" AND TRUCK_NAME=\"${req.query['O2']}\" AND RATING=${req.query['O3']}`;
+    console.log(sql);
+    db.all(sql,  (err, row) => {
+        if (err) {
+            return console.error(err.message)
+        }
+    res.send(row)
+    res.end();
+    return console.log(row)
+});
+    console.log(req.body); 
+ //   res.sendStatus(200);
+    
+  } 
+
+    
 });
 
 app.listen(port, hostname, () => {
