@@ -21,7 +21,7 @@
 
 
 <h1>Drexel Food Truck Reviews</h1>
-<table>
+<table id='r'>
 <div>
 	<label for="cuisine">Cuisine:</label>
 	<select name="cuisine" id="cuisine-select">
@@ -52,11 +52,11 @@
 	<label for="rating">Rating Range:</label>
 	<select name="rating" id="rating-select">
 		<option value="">Please select a rating range</option>
-		<option value="one">0.0-1.0</option>
-		<option value="one">1.0-2.0</option>
-		<option value="two">2.0-3.0</option>
-		<option value="three">3.0-4.0</option>
-		<option value="four">4.0-5.0</option>
+		<option value=1>0.0-1.0</option>
+		<option value=2>1.0-2.0</option>
+		<option value=3>2.0-3.0</option>
+		<option value=4>3.0-4.0</option>
+		<option value=5>4.0-5.0</option>
 	
 	</select>
 </div>
@@ -69,48 +69,45 @@
 
 </table>
 
-<script src="testDatabase.js"></script>
+<script >
 
-<table id="food-truck">
-	<tr><th>Food Truck</th><th>Cuisine type</th><th>Rating score</th></tr>
-</table>
+function disp(data){
+    var table = document.getElementById("r");
+    var row = table.insertRow(-1);
+    var USER_NAME = row.insertCell(0);
+    var TRUCK_NAME = row.insertCell(1);
+    var RATING = row.insertCell(2);
+    var FOOD_TYPE=row.insertCell(3);
+    var REVIEW = row.insertCell(3);
+    USER_NAME.innerHTML = data[0]['USER_NAME'];
+    TRUCK_NAME.innerHTML = data[0]['TRUCK_NAME'];
+    RATING.innerHTML = data[0]["RATING"];
+    FOOD_TYPE.innerHTML = data[0]['FOOD_TYPE']
+    REVIEW.innerHTML = data[0]['REVIEW']
+}
 
-<script>
-let foodTruckSelect = document.getElementById("ft-select");
-let cuisineTypeSelect = document.getElementById("cuisine-select");
-let ratingRangeSelect = document.getElementById("rating-select");
-let table = document.getElementById("food-truck");
+let button = document.getElementById("get-button");
+button.addEventListener("click", function(){    
+    let dropdown1 = document.getElementById("cuisine-select");
+    let O1 =  dropdown1.options[dropdown1.selectedIndex].value;
+    let dropdown2 = document.getElementById("ft-select");
+    let O2 =  dropdown2.options[dropdown2.selectedIndex].value;
+    let dropdown3 = document.getElementById("rating-select");
+    let O3 =  dropdown3.options[dropdown3.selectedIndex].value;
+    let sql=`SELECT * FROM TRUCKS WHERE FOOD_TYPE=\'${O1} AND TRUCK_NAME=\'${O2} AND RATING=${O3}`;
+    let s = `http://localhost:3000/search?O1=${O1}&O2=${O2}&O3=${O3}`;
+    
+    fetch(s)
+    .then(response => response.json())
+	.then(data => {
+		console.log(data[0]['RATING']);
+		console.log("Data:", data[0]);
+                disp(data);
 
-let sendButton = document.getElementById("get-button");
-sendButton.addEventListener("click", function() {
-	if (foodTruckSelect.value === "" || cuisineTypeSelect.value === "" || ratingRangeSelect=== "") {
-		return;
-	}
-	let food = foodTruckSelect.value;
-	let cuisine = cuisineTypeSelect.value;
-	let rating = ratingRangeSelect.value;
-	let url ;
-	console.log("Client sending request to URL:", url);
-	fetch(url).then(function (response) {
-		return response.json();
-	}).then(function (data) {
-		console.log("Client received from server:", data);
-		let row = document.createElement("tr");
-		let foodCell = document.createElement("td");
-		foodCell.textContent = food;
-		let cuisineCell = document.createElement("td");
-		cuisineCell.textContent = cuisine;
-		let ratingCell = document.createElement("td");
-		ratingCell.textContent = rating;
-		row.append(foodCell);
-		row.append(cuisineCell);
-		row.append(ratingCell);
-		table.append(row);
-	});
+    });
+    
 });
 </script>
-
-
 
 </body>
 </html>
