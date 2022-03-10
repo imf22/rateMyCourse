@@ -1,0 +1,13 @@
+﻿Food truck name, rating, and food_type
+
+
+1. Kami, 4.0, Lunch/Dinner
+2. Andy’s Chinese Truck, 4.5, Lunch/Dinner
+3. Pete’s Little Lunch Box, 5.0, American
+4. Dos Hermanos Tacos, 4.5, Mexican
+5. The Spot Food Truck, 4.5, American
+6. Halal Food Truck, 4.5, Lunch/Dinner
+7. The Jimmy Truck, 4.5, Lunch/Dinner
+8. Cucina pizza, 4.5, Mexican 
+9. Mommy’s Telly’s famous BBQ, 5.0, Lunch/Dinner
+10. Los Compadres, 4.0, Mexican
