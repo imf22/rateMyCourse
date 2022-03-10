@@ -89,7 +89,7 @@ sendButton.addEventListener("click", function() {
 	let food = foodTruckSelect.value;
 	let cuisine = cuisineTypeSelect.value;
 	let rating = ratingRangeSelect.value;
-	let url = ;
+	let url ;
 	console.log("Client sending request to URL:", url);
 	fetch(url).then(function (response) {
 		return response.json();
