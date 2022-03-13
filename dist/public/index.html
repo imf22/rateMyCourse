@@ -111,9 +111,38 @@ sendButton.addEventListener("click", function() {
 });
 </script>
 <script> 
+	let foodTruckSelect = document.getElementById("ft-select");
+	let cuisineTypeSelect = document.getElementById("cuisine-select");
+	let ratingRangeSelect = document.getElementById("rating-select");
 	let sendButton = document.getElementById("get-button2");
 	sendButton.addEventListener("click", function() {
-		<input type="button" onclick="truckpage_template.pug"; value="Go to template page"/>
+		let template = {
+				name: foodTruckSelect.value,
+				type: cuisineTypeSelect.value,
+				rating: ratingRangeSelect.value,
+		}
+
+		fetch('/getTruckPage', {
+			method: "POST",
+			headers: {
+					"Content-Type": "application/JSON",
+			},
+			body: JSON.stringify(template),
+
+		}).then(function (response) {
+			document.getElementById("message").innerHTML = "Success";
+
+			if(response.status!=200){
+				throw new Error('Something went wrong');
+			}
+
+			console.log("Response status after stringify",response.status);
+		}).catch(function (error) {
+			document.getElementById("message").innerHTML = "Bad Request";
+			console.log(error);
+		});
+
+		});
 
 </script>
 
