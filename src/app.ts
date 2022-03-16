@@ -29,7 +29,7 @@ db.all(sql,  (err, row) => {
 
 app.get('/', (req, res) => {});
 
-app.get('/getTruckPage', (req, res) => {
+app.post('/getTruckPage', (req, res) => {
 
   // let sql = `SELECT * FROM TRUCKS WHERE FOOD_TYPE=\'${O1} AND TRUCK_NAME=\'${O2} AND RATING=${O3}`;
 
@@ -40,9 +40,9 @@ if (!body.hasOwnProperty("truckname")){
   return res.sendStatus(400);
 }
 else{
-  sql=`SELECT * FROM TRUCKS WHERE TRUCK_NAME=${req.query['truckname']}`;
+  sql=`SELECT * FROM TRUCKS WHERE TRUCK_NAME = ?`;
   console.log(sql);
-  db.all(sql,  (err, row) => {
+  db.all(sql, [body.truckname], (err, row) => {
       if (err) {
           console.error(err.message)
           res.sendStatus(500);
@@ -53,7 +53,17 @@ else{
         let truckName= row[0].TRUCK_NAME; 
         let cuisine= row[0].RATING;
         let rating= row[0].FOOD_TYPE;
-        let reviews_a= [['a'],['b'],['c']]; // An Array of Text obects
+        let reviews_a= []; // An Array of Text obects
+
+        console.log("\n\n PRINTING REVIEWS");
+        
+
+        for (let user_review of row){
+          // console.log(user_review.REVIEW,"\n");
+          reviews_a.push({"user": user_review.USER_NAME, "rate": user_review.RATING, "review": user_review.REVIEW});
+        }
+        // console.log(reviews_a);
+
 
         // Send request for custom truck page
         res.send(trucktemplate({truckname: truckName, cuisine: cuisine, rating: rating , reviews: reviews_a}));
@@ -67,12 +77,6 @@ else{
 //   res.sendStatus(200);
   
 } 
-
-
-
-
-
-
     // res.send(trucktemplate({truckname: "Happy Sunshine Food Truck", cuisine: "Breakfast", rating: 4.5 , reviews: reviews_t}));
 })
 

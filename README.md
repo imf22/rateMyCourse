@@ -1,4 +1,24 @@
 # rateMyCourse
+##########################################################################################################
+RUNNING APP FOR THE FIRST TIME:
+
+Create a test database using 
+    npm run makeTestDb
+This will create a small database of trucks and default reviews to view.
+Make sure there exist a directory /dist within the main directory before running this function
+
+To Start
+    npm start
+This will start the server
+Requries that there exist a directory ./dist and a databass(data.db) in /dist before starting
+
+
+##########################################################################################################
+
+
+
+To start
+
 
     npx tsc
 

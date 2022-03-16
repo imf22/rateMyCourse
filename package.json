@@ -5,6 +5,7 @@
   "main": "dist/app.js",
   "scripts": {
     "start": "cp -R ./dist/data.db ./src && rm -r ./dist && tsc && cp -R ./src/public ./dist/public && cp ./src/data.db ./dist/data.db && (cd dist && node app.js)",
+    "makeTestDb": "(cd src && node public/testDatabase.js && node public/testDatabase.js) && cd ../ && cd && cp ./src/data.db ./dist/data.db",
     "lint": "eslint . --ext .ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

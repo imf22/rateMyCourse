@@ -27,6 +27,46 @@ db.all(sql, (err, row) => {
     return console.log(row);
 });
 app.get('/', (req, res) => { });
+app.post('/getTruckPage', (req, res) => {
+    // let sql = `SELECT * FROM TRUCKS WHERE FOOD_TYPE=\'${O1} AND TRUCK_NAME=\'${O2} AND RATING=${O3}`;
+    let body = req.body;
+    console.log(req.query);
+    if (!body.hasOwnProperty("truckname")) {
+        console.log(body.query);
+        return res.sendStatus(400);
+    }
+    else {
+        sql = `SELECT * FROM TRUCKS WHERE TRUCK_NAME = ?`;
+        console.log(sql);
+        db.all(sql, [body.truckname], (err, row) => {
+            if (err) {
+                console.error(err.message);
+                res.sendStatus(500);
+            }
+            else {
+                console.log(row);
+                let truckName = row[0].TRUCK_NAME;
+                let cuisine = row[0].RATING;
+                let rating = row[0].FOOD_TYPE;
+                let reviews_a = []; // An Array of Text obects
+                console.log("\n\n PRINTING REVIEWS");
+                for (let user_review of row) {
+                    // console.log(user_review.REVIEW,"\n");
+                    reviews_a.push({ "user": user_review.USER_NAME, "rate": user_review.RATING, "review": user_review.REVIEW });
+                }
+                // console.log(reviews_a);
+                // Send request for custom truck page
+                res.send(trucktemplate({ truckname: truckName, cuisine: cuisine, rating: rating, reviews: reviews_a }));
+            }
+            // res.send(row)
+            // res.end();
+            // return console.log(row)
+        });
+        // console.log(req.body); 
+        //   res.sendStatus(200);
+    }
+    // res.send(trucktemplate({truckname: "Happy Sunshine Food Truck", cuisine: "Breakfast", rating: 4.5 , reviews: reviews_t}));
+});
 app.get('/test', (req, res) => {
     let r1 = { user: "Medha", rate: 3, review: `She looked at her student wondering if she could ever get through. "You need to learn to think for yourself," she wanted to tell him. "Your friends are holding you back and bringing you down." But she didn't because she knew his friends were all that he had and even if that meant a life of misery, he would never give them up.` };
     let r2 = { user: "Irving", rate: 4, review: `She was infatuated with color. She didn't have a favorite color per se, but she did have a fondness for teals and sea greens. You could see it in the clothes she wore that color was an important part of her overall style. She took great pride that color flowed from her and that color was always all around her. That is why, she explained to her date sitting across the table, that she could never have a serious relationship with him due to the fact that he was colorblind.` };
