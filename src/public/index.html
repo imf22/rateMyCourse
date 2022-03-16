@@ -76,14 +76,49 @@ function disp(data){
     var row = table.insertRow(-1);
     var USER_NAME = row.insertCell(0);
     var TRUCK_NAME = row.insertCell(1);
-    var RATING = row.insertCell(2);
-    var FOOD_TYPE=row.insertCell(3);
-    var REVIEW = row.insertCell(3);
-    USER_NAME.innerHTML = data['USER_NAME'];
-    TRUCK_NAME.innerHTML = data['TRUCK_NAME'];
-    RATING.innerHTML = data["RATING"];
-    FOOD_TYPE.innerHTML = data['FOOD_TYPE']
-    REVIEW.innerHTML = data['REVIEW']
+
+	var PAGE_BUTTON = row.insertCell(2)
+
+    var RATING = row.insertCell(3);
+    var FOOD_TYPE=row.insertCell(4);
+    var REVIEW = row.insertCell(4);
+	
+	var button = document.createElement('button', {id: `${data['TRUCK_NAME']}`} );
+	button.innerHTML= "Go to Page";	
+	// button.addEventListener('click',() => {
+	// 	d = `http://localhost:3000/getTruckPage`
+	// 	fetch(d, {
+	// 		headers: {
+	// 			'Accept': 'text/html',
+	// 			'Content-Type': 'application/json'
+	// 		},
+	// 		method: "POST",
+	// 		body: JSON.stringify({truckname: `${data['TRUCK_NAME']}`})})
+	// 		// body: JSON.stringify({truckname: `${data['TRUCK_NAME']}`})})
+	// 		.then(data => {
+	// 			console.log(data);
+	// 		})
+	// 	})
+
+	button.addEventListener('click',() => {
+		d = `http://localhost:3000/getTruckPage?truck=${data['TRUCK_NAME']}`
+		fetch(d, {
+			headers: {
+				'Accept': 'text/html',
+				'Content-Type': 'application/json'
+			}})
+			.then(data => {
+				console.log(data);
+			})
+		})
+		
+	USER_NAME.innerHTML = data['USER_NAME'];
+	TRUCK_NAME.innerHTML = data['TRUCK_NAME'];
+	PAGE_BUTTON.append(button);
+	RATING.innerHTML = data["RATING"];
+	FOOD_TYPE.innerHTML = data['FOOD_TYPE']
+	REVIEW.innerHTML = data['REVIEW']
+
 }
 
 let button = document.getElementById("get-button");
@@ -101,7 +136,7 @@ button.addEventListener("click", function(){
     .then(response => response.json())
 	.then(data => {
 		console.log(data);
-		
+
 		for (row of data){
 			disp(row);
 		}
