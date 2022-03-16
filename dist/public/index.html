@@ -79,11 +79,11 @@ function disp(data){
     var RATING = row.insertCell(2);
     var FOOD_TYPE=row.insertCell(3);
     var REVIEW = row.insertCell(3);
-    USER_NAME.innerHTML = data[0]['USER_NAME'];
-    TRUCK_NAME.innerHTML = data[0]['TRUCK_NAME'];
-    RATING.innerHTML = data[0]["RATING"];
-    FOOD_TYPE.innerHTML = data[0]['FOOD_TYPE']
-    REVIEW.innerHTML = data[0]['REVIEW']
+    USER_NAME.innerHTML = data['USER_NAME'];
+    TRUCK_NAME.innerHTML = data['TRUCK_NAME'];
+    RATING.innerHTML = data["RATING"];
+    FOOD_TYPE.innerHTML = data['FOOD_TYPE']
+    REVIEW.innerHTML = data['REVIEW']
 }
 
 let button = document.getElementById("get-button");
@@ -100,9 +100,14 @@ button.addEventListener("click", function(){
     fetch(s)
     .then(response => response.json())
 	.then(data => {
-		console.log(data[0]['RATING']);
-		console.log("Data:", data[0]);
-                disp(data);
+		console.log(data);
+		// console.log(data[0]['RATING']);
+		// console.log("Data:", data[0]);
+		// disp(data);
+		
+		for (row of data){
+			disp(row);
+		}
 
     });
     

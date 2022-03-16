@@ -48,8 +48,7 @@ app.post('/getTruckPage', (req, res) => {
                 let truckName = row[0].TRUCK_NAME;
                 let cuisine = row[0].RATING;
                 let rating = row[0].FOOD_TYPE;
-                let reviews_a = []; // An Array of Text obects
-                console.log("\n\n PRINTING REVIEWS");
+                let reviews_a = []; // An Array of Text obects        
                 for (let user_review of row) {
                     // console.log(user_review.REVIEW,"\n");
                     reviews_a.push({ "user": user_review.USER_NAME, "rate": user_review.RATING, "review": user_review.REVIEW });
