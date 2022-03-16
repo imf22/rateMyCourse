@@ -14,8 +14,12 @@ Requries that there exist a directory ./dist and a databass(data.db) in /dist be
 
 
 ##########################################################################################################
+VIEW TRUCK REVIEWS USING CURL
 
+Through the use of the curl command we can get the html page for any stored truck
+    curl -H "Content-Type: application/json" -d "{\"truckname\":\"truck_name_here\"}" http://localhost:3000/getTruckPage
 
+##########################################################################################################
 
 To start
 
