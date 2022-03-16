@@ -14,11 +14,7 @@ app.use(express.static("public"));
 //create database
 const sqlite3 = require('sqlite3').verbose();
 const db = new sqlite3.Database('data.db');
-// db.exec('CREATE TABLE IF NOT EXISTS TRUCKS(TRUCK_ID INTEGER PRIMARY KEY,USER_NAME TEXT NOT NULL UNIQUE,TRUCK_NAME TEXT NOT NULL UNIQUE,RATING INTEGER NOT NULL,FOOD_TYPE TEXT NOT NULL UNIQUE, REVIEW TEXT NOT NULL UNIQUE )');
-//db.exec('INSERT INTO TRUCKS (TRUCK_ID,USER_NAME,TRUCK_NAME,RATING,FOOD_TYPE,REVIEW) VALUES (1,"TEST","TEST",5,"TEST","GOOD")');
 
-//db.exec('CREATE TABLE TRUCKS(TRUCK_ID INTEGER PRIMARY KEY,USER_NAME TEXT NOT NULL UNIQUE,TRUCK_NAME TEXT NOT NULL UNIQUE,RATING INTEGER NOT NULL,FOOD_TYPE TEXT NOT NULL UNIQUE, REVIEW TEXT NOT NULL UNIQUE )');
-//db.exec('INSERT INTO TRUCKS (USER_NAME,TRUCK_NAME,RATING,FOOD_TYPE,REVIEW) VALUES ("FT2","FT2",5,"Mexican","GOOD3")');
 let sql = 'SELECT * FROM TRUCKS';
 db.all(sql,  (err, row) => {
     if (err) {
@@ -30,8 +26,6 @@ db.all(sql,  (err, row) => {
 app.get('/', (req, res) => {});
 
 app.get('/getTruckPage', (req, res) => {
-
-  // let sql = `SELECT * FROM TRUCKS WHERE FOOD_TYPE=\'${O1} AND TRUCK_NAME=\'${O2} AND RATING=${O3}`;
 
   let trucknames =  req.query.truck;
   console.log(trucknames)
@@ -67,11 +61,10 @@ else{
 
 
         // Send request for custom truck page
-        // console.log("PAGE:\n",trucktemplate({truckname: truckName, cuisine: cuisine, rating: rating , reviews: reviews_a}));
-        res.redirect(trucktemplate({truckname: truckName, cuisine: cuisine, rating: rating , reviews: reviews_a}));
+        res.send(trucktemplate({truckname: truckName, cuisine: cuisine, rating: rating , reviews: reviews_a}));
 
       }
-
+/
 });
 
 } 
@@ -158,8 +151,8 @@ app.post('/postReview', function (req, res) {
     console.log(req.body); 
     res.sendStatus(200);
   } 
-   // insert one row into the TRUCKS table
-   db.exec(`INSERT INTO TRUCKS(TRUCK_ID,USER_NAME,TRUCK_NAME,RATING,FOOD_TYPE,REVIEW) VALUES(1,$1,$2,$3,"TEST",$4)`, function(err) {
+   // insert one row into the REVIEW table
+   db.run(`INSERT INTO TRUCKS(USER_NAME,TRUCK_NAME,RATING,REVIEW) VALUES(?,?,?,?)`,[body.name,body.foodTruck,body.rating,body.review] ,function(err) {
     if (err) {
       return console.log(err.message);
       return res.sendStatus(500);
@@ -168,18 +161,7 @@ app.post('/postReview', function (req, res) {
     console.log(`A row has been inserted`);
     return res.send();
   });
-  // pool.query(
-  //     "INSERT INTO books(title, genre, quality) VALUES($1, $2, $3) RETURNING *",
-  //     [body.title, body.genre, body.quality]
-  // )
-  //     .then(function (response) {
-  //         console.log(response.rows);
-  //         return res.send();
-  //     })
-  //     .catch(function (error) {
-  //         console.log("error here?");
-  //         return res.sendStatus(500);
-  //     });
+
 });
 
 

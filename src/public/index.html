@@ -109,6 +109,7 @@ function disp(data){
 			}})
 			.then(data => {
 				console.log(data);
+				window.location.replace(data.url);
 			})
 		})
 		
