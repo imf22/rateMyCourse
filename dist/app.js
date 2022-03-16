@@ -125,7 +125,7 @@ app.get('/search', (req, res) => {
         //  return res.sendStatus(400);
     }
     else {
-        sql = `SELECT * FROM TRUCKS WHERE LOWER(FOOD_TYPE)=\"${req.query['O1']}\" AND TRUCK_NAME=\"${req.query['O2']}\" AND RATING=${req.query['O3']}`;
+        sql = `SELECT * FROM TRUCKS WHERE LOWER(FOOD_TYPE)=\"${req.query['O1']}\" OR TRUCK_NAME=\"${req.query['O2']}\" OR RATING=${req.query['O3']}`;
         console.log(sql);
         db.all(sql, (err, row) => {
             if (err) {

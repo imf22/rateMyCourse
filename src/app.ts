@@ -53,10 +53,7 @@ else{
         let truckName= row[0].TRUCK_NAME; 
         let cuisine= row[0].RATING;
         let rating= row[0].FOOD_TYPE;
-        let reviews_a= []; // An Array of Text obects
-
-        console.log("\n\n PRINTING REVIEWS");
-        
+        let reviews_a= []; // An Array of Text obects        
 
         for (let user_review of row){
           // console.log(user_review.REVIEW,"\n");
@@ -148,7 +145,7 @@ app.get('/search', (req, res) => {
     //  return res.sendStatus(400);
   }
   else{
-    sql=`SELECT * FROM TRUCKS WHERE LOWER(FOOD_TYPE)=\"${req.query['O1']}\" AND TRUCK_NAME=\"${req.query['O2']}\" AND RATING=${req.query['O3']}`;
+    sql=`SELECT * FROM TRUCKS WHERE LOWER(FOOD_TYPE)=\"${req.query['O1']}\" OR TRUCK_NAME=\"${req.query['O2']}\" OR RATING=${req.query['O3']}`;
     console.log(sql);
     db.all(sql,  (err, row) => {
         if (err) {
