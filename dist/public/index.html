@@ -40,10 +40,16 @@
 	<label for="foodTruck">Food Truck:</label>
 	<select name="foodTruck" id="ft-select">
 		<option value="">Please select a food truck</option>
-		<option value="FT1">FT 1</option>
-		<option value="FT2">FT 2</option>
-		<option value="FT3">FT 3</option>
-		<option value="FT4">FT 4</option>
+        <option value="Kami">Kami</option>
+        <option value="Andy's Chinese Truck">Andy's Chinese Truck</option>
+        <option value="Pete's Little Lunch Box">Pete's Little Lunch Box</option>
+        <option value="Dos Hermanos Tacos">Dos Hermanos Tacos</option>
+        <option value="The Spot Food Truck">The Spot Food Truck</option>
+        <option value="Halal Food Truck">Halal Food Truck</option>
+        <option value="The Jimmy Truck">The Jimmy Truck</option>
+        <option value="Cucina pizza">Cucina pizza</option>
+        <option value="Mommy's Telly's famous BBQ">Mommy’s Telly’s famous BBQ</option>
+        <option value="Los Compadres">Los Compadres</option>
 	
 	</select>
 </div>
@@ -85,20 +91,6 @@ function disp(data){
 	
 	var button = document.createElement('button', {id: `${data['TRUCK_NAME']}`} );
 	button.innerHTML= "Go to Page";	
-	// button.addEventListener('click',() => {
-	// 	d = `http://localhost:3000/getTruckPage`
-	// 	fetch(d, {
-	// 		headers: {
-	// 			'Accept': 'text/html',
-	// 			'Content-Type': 'application/json'
-	// 		},
-	// 		method: "POST",
-	// 		body: JSON.stringify({truckname: `${data['TRUCK_NAME']}`})})
-	// 		// body: JSON.stringify({truckname: `${data['TRUCK_NAME']}`})})
-	// 		.then(data => {
-	// 			console.log(data);
-	// 		})
-	// 	})
 
 	button.addEventListener('click',() => {
 		d = `http://localhost:3000/getTruckPage?truck=${data['TRUCK_NAME']}`
