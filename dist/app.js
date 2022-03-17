@@ -15,13 +15,7 @@ var dict = { "Kami": "Lunch/Dinner", "Andy's Chinese Truck": "Lunch/Dinner", "Pe
 //create database
 const sqlite3 = require('sqlite3').verbose();
 const db = new sqlite3.Database('data.db');
-let sql = 'SELECT * FROM TRUCKS';
-db.all(sql, (err, row) => {
-    if (err) {
-        return console.error(err.message);
-    }
-    return console.log(row);
-});
+let sql;
 app.get('/', (req, res) => { });
 app.get('/getTruckPage', (req, res) => {
     let trucknames = req.query.truck;
@@ -44,11 +38,16 @@ app.get('/getTruckPage', (req, res) => {
                 console.log(row);
                 let truckName = row[0]["TRUCK_NAME"];
                 let cuisine = row[0]["FOOD_TYPE"];
-                let rating = row[0]["RATING"];
                 let reviews_a = []; // An Array of Text obects        
+                let i = 0;
+                let sum = 0;
                 for (let user_review of row) {
                     reviews_a.push({ "user": user_review.USER_NAME, "rate": user_review.RATING, "review": user_review.REVIEW });
+                    i++;
+                    sum += user_review.RATING;
                 }
+                // let rating= Math.round(100 * (sum / i)) / 100;
+                let rating = (sum / i).toFixed(2);
                 // Send request for custom truck page
                 res.send(trucktemplate({ truckname: truckName, cuisine: cuisine, rating: rating, reviews: reviews_a }));
             }
