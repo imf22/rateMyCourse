@@ -10,8 +10,8 @@ app.use(express.json());
 app.use(express.static("public"));
 
 
-var dict = {"Kami":"Lunch/Dinner","Andy's Chinese Truck":"Lunch/Dinner","Pete's Little Lunch Box":"American","Dos Hermanos Tacos":"Mexican","The Spot Food Truck":"American","Halal Food Truck":"Lunch/Dinner","The Jimmy Truck":"Lunch/Dinner","Cucina pizza":"Mexican","Mommy's Telly's famous BBQ":"Lunch/Dinner","Los Compadres":"Mexican"}
-vat imgdict = {"Kami":"", "P"}
+var dict = {"Kami":"Lunch/Dinner","Pete's Little Lunch Box":"American","The Spot Food Truck":"American","Halal Food Truck":"Lunch/Dinner","Mommy's Telly's famous BBQ":"Lunch/Dinner"}
+var imgdict = {"Kami":"kami.jpg","Pete's Little Lunch Box":"pete.jpg","The Spot Food Truck":"spot.jpg","Halal Food Truck":"halal.jpeg","Mommy's Telly's famous BBQ":"bbq.jpeg"}
 
 //create database
 const sqlite3 = require('sqlite3').verbose();
@@ -60,7 +60,7 @@ app.get('/getTruckPage', (req, res) => {
       let rating = (sum / i).toFixed(2);
 
       // Send request for custom truck page
-      res.send(trucktemplate({truckname: truckName,image: imgdict[truckName], cuisine: cuisine, rating: rating , reviews: reviews_a}));
+      res.send(trucktemplate({truckname: truckName, imgpath: imgdict[truckName], cuisine: cuisine, rating: rating , reviews: reviews_a}));
 
     }
 

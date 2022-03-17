@@ -49,11 +49,11 @@ function fillrows(){
     insertData(r1.user, "Kami", 2, "lunchdinner", r1.review);
     insertData(r4.user, "Pete's Little Lunch Box", 5, "american", r4.review);
     insertData(r3.user, "Pete's Little Lunch Box", 4, "american", r1.review);
-    insertData(r2.user, "Dos Hermanos Tacos", 3, "mexican", r3.review);
-    insertData(r4.user, "Dos Hermanos Tacos", 4, "mexican", r1.review);
-    insertData(r1.user, "Dos Hermanos Tacos", 2, "mexican", r4.review);
+    insertData(r2.user, "The Spot Food Truck", 3, "mexican", r3.review);
+    insertData(r4.user, "The Spot Food Truck", 4, "mexican", r1.review);
+    insertData(r1.user, "The Spot Food Truck", 2, "mexican", r4.review);
     insertData(r3.user, "Halal Food Truck", 2, "lunchdinner", r1.review);
-    insertData(r4.user, "The Spot Food Truck", 1, "american", r2.review);
+    insertData(r4.user, "Mommy's Telly's famous BBQ", 1, "american", r2.review);
 }
 
 // SOME TRUCK DATA
