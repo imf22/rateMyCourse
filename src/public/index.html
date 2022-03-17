@@ -130,6 +130,16 @@ button.addEventListener("click", function(){
 	.then(data => {
 		console.log(data);
 
+		var table = document.getElementById("r");
+		// while (table.firstChild.childNodes !== 0){
+		// 	table.firstChild.removeChild(table.firstChild.firstChild);
+		// }
+
+		for (var i = table.rows.length-1; i >= 0; i--) {
+                table.deleteRow(i);
+                //console.log("deleting row ",i);
+            }
+
 		for (row of data){
 			disp(row);
 		}
